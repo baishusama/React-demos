@@ -8,7 +8,7 @@ module.exports = {
     },
 
     module: {//在配置文件里添加JSON loader
-        loaders: [
+        loaders: [// !! loaders
             {
                 test: /\.json$/,
                 loader: "json"
@@ -23,10 +23,19 @@ module.exports = {
             },
             {//添加对样式表的处理
                 test: /\.css$/,//下面感叹号 ! 的作用在于使同一文件能够使用不同类型的loader
-                loader: 'style!css?modules'//跟之前相比就在后面加上了?modules
+                loader: 'style!css?modules!postcss'//跟之前相比就在后面加上了?modules
+                //新建一个postcss关键字，
             }
         ]
     },
+
+    postcss: [
+        require('autoprefixer')//调用autoprefixer插件
+    ],
+
+    /*plugins: [
+        new webpack.BannerPlugin("Copyright Imo Proj.")//在这个数组中new一个就可以了
+    ],*/
 
     devServer: {//通过 http://localhost:8233/webpack-dev-server/ 访问www！
         port: "8233",//默认为 8080
