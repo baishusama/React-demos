@@ -58,4 +58,4 @@ class StaffDetail extends Component {
     }
 }
 
-export default StaffDetail
+export default StaffDetail;

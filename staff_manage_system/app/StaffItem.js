@@ -19,4 +19,4 @@ class StaffItem extends Component {
     }
 }
 
-export default StaffItem
+export default StaffItem;

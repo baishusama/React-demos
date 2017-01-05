@@ -98,4 +98,4 @@ class StaffFooter extends Component {
     }
 }
 
-export default StaffFooter
+export default StaffFooter;

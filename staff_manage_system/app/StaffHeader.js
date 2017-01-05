@@ -48,4 +48,4 @@ class StaffHeader extends Component {
     }
 }
 
-export default StaffHeader
+export default StaffHeader;

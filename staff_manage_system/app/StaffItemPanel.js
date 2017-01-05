@@ -33,4 +33,4 @@ class StaffItemPanel extends Component {
     }
 }
 
-export default StaffItemPanel
+export default StaffItemPanel;
