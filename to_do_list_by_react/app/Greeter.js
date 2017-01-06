@@ -4,6 +4,8 @@ import React, {
 } from 'react'
 import config from './config.json';
 
+import styles from './Greeter.scss'; //导入
+
 class Greeter extends Component {
   render() {
     return (

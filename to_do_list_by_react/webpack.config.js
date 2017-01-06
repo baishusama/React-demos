@@ -15,9 +15,16 @@ module.exports = {
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel'
+    }, { //添加对样式表的处理
+      test: /\.css$/, //下面感叹号 ! 的作用在于使同一文件能够使用不同类型的loader
+      loader: 'style!css?modules!postcss' //跟之前相比就在后面加上了?modules
+        //新建一个postcss关键字，
     }, {
-      test: /\.css$/,
-      loader: 'style!css?modules!postcss' //添加对样式表的处理
+      test: /\.(jpg|png)$/,
+      loader: "url?limit=8192"
+    }, {
+      test: /\.scss$/,
+      loader: "style!css!sass"
     }]
   },
 
@@ -26,7 +33,7 @@ module.exports = {
   ],
 
   devServer: {
-    post: "8233",
+    port: "8234", //默认为 8080
     contentBase: "./public", //本地服务器所加载的页面所在的目录
     colors: true, //终端中输出结果为彩色
     historyApiFallback: true, //不跳转

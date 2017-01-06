@@ -26,5 +26,16 @@
 
 ### SASS 等其他
 
-1. [安装 node-sass](http://99jty.com/?p=1302)
-2. `cnpm install --save-dev url-loader sass-loader file-loader`
+1. [安装 node-sass](http://99jty.com/?p=1302)：`cnpm install -g node-sass`
+2. `cnpm install -g node-sass`
+3. `cnpm install --save-dev url-loader sass-loader file-loader`
+
+### 原生 JS 开发的话
+
+0. `npm init`
+1. `cnpm install --save-dev webpack`
+3. `cnpm install --save-dev webpack-dev-server`
+4. `cnpm install --save-dev json-loader`
+5. `cnpm install --save-dev style-loader css-loader`
+6. `cnpm install --save-dev postcss-loader autoprefixer`
+7. `cnpm install --save-dev node-sass url-loader sass-loader file-loader`
