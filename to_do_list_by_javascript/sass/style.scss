@@ -1,0 +1,164 @@
+/* SASS Defination */
+$themeColor: powderblue;
+$themeColorDarken25: darken($themeColor, 25%); 
+$themeColorDarken40: darken($themeColor, 40%); 
+$checkBoxWidth: 10%;
+$lineHeight: 50px;
+$hiddenPieceHeight: 6px;
+$pdToMainBd: 16px; 
+
+@mixin hiddenPiecePseudo($index){
+  position: absolute;
+  left: percentage($index/100);
+  bottom: - $hiddenPieceHeight * $index;
+  display: block;
+  content: '\a0';
+  width: percentage(1-$index/100*2);
+  height: $hiddenPieceHeight;
+  background-color: #eee;
+  @include tinnyBoxshadow();
+}
+@mixin tinnyBoxshadow(){
+  box-shadow: 0 2px 2px rgba(0,0,0,.2);
+}
+
+/* Specific */
+
+html,
+body {
+  height: 100%;
+  background-color: aliceblue;
+  font-family: lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+
+header h2 {
+  margin: 20px 0;
+  color: $themeColor;
+  text-align: center;
+  font-size: 80px;
+  font-weight: normal;
+}
+
+.main {
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+  max-width: 500px;
+  background-color: #fff;
+  box-shadow: 0 20px 50px rgba(0,0,0,.2), 0 0 2px rgba(0,0,0,.3);
+  /* &:before {
+    @include hiddenPiecePseudo(2);
+  } */
+  input[type="checkbox"] {
+    // display: none; // test
+    & + label + input {
+      float: left;
+      display: block;
+      border: none;
+      padding: 0 40px 0 20px;
+      width: 100% - $checkBoxWidth;
+      line-height: $lineHeight;
+      font-size: 20px;
+    }
+  }
+  label {
+    float: left;
+    display: block;
+    width: $checkBoxWidth;
+    height: $lineHeight;
+  }
+  .head {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+  }
+  #todo-list {
+    &:before {
+      @include hiddenPiecePseudo(2);
+    }
+    &:after {
+      @include hiddenPiecePseudo(1);
+    }
+    li {
+      overflow: hidden;
+      position: relative;
+      border-bottom: 1px solid #eee;
+      input:checked {
+        & + label {
+
+        }
+        & ~ .todo {
+          color: #ddd;
+          text-decoration: line-through;
+        }
+      }
+      label {
+        &:before {
+          display: block;
+          content: '\a0';
+          width: 30px;
+          height: 30px;
+          border: 1px solid #eee;
+          border-radius: 15px;
+        }
+      }
+      .todo {
+        /* input:checked ~ & {
+          color: #ddd;
+          text-decoration: line-through;
+        } */
+      }/* This nested way doesn't work. Why??? */
+      &:hover .delete { display: block; }
+      .delete {
+        display: none;
+        position: absolute;
+        right: $pdToMainBd;
+        bottom: $pdToMainBd;
+        color: $themeColorDarken25;
+        font-family: "Microsoft YaHei";
+        transform: scaleX(1.4);
+        &:hover {
+          color: $themeColorDarken40;
+        }
+      }
+    }
+  }
+  .footer {
+    position: relative;
+    padding: 6px;
+    color: #888;
+    text-align: center;
+    font-size: 13px;
+    @include tinnyBoxshadow();
+    #info {
+      position: absolute;
+      top: 6px + 3px;
+      left: $pdToMainBd;
+    }
+    #option {
+      display: inline-block;
+      span {
+        display: inline-block;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        padding: 3px 5px;
+        &:hover {
+          border-color: $themeColor;
+          cursor: pointer;
+        }
+        &.chosen {
+          border-color: $themeColorDarken25;
+        }
+      }
+    }
+    #clear {
+      position: absolute;
+      top: 6px;
+      right: $pdToMainBd - 5px;
+      padding: 3px 5px;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
