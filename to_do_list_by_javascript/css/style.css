@@ -24,8 +24,8 @@ header h2 {
   background-color: #fff;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2), 0 0 2px rgba(0, 0, 0, 0.3);
   /* &:before {
-    @include hiddenPiecePseudo(2);
-  } */ }
+  @include hiddenPiecePseudo(2);
+} */ }
   .main input[type="checkbox"] {
     display: none; }
     .main input[type="checkbox"]#checkAllTodo + label + input, .main input[type="checkbox"] + label + div {
@@ -36,7 +36,8 @@ header h2 {
       padding: 0 40px 0 20px;
       width: 100%;
       line-height: 50px;
-      font-size: 20px; }
+      font-size: 20px;
+      outline: none; }
   .main label {
     /* 所有的 label */
     position: absolute;
@@ -148,10 +149,10 @@ header h2 {
         border: 1px solid #eee;
         border-radius: 15px; }
     .main #todo-list li .todo {
-      /* input:checked ~ & {
-        color: #ddd;
-        text-decoration: line-through;
-      } */ }
+        /* input:checked ~ & {
+  color: #ddd;
+  text-decoration: line-through;
+} */ }
     .main #todo-list li:hover .delete {
       display: block; }
     .main #todo-list li .delete {
