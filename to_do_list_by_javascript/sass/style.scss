@@ -1,12 +1,48 @@
+@charset "UTF-8";
+/* SASS Import */
+@import url("./normalize.css");
 /* SASS Defination */
 $themeColor: powderblue;
-$themeColorDarken25: darken($themeColor, 25%); 
-$themeColorDarken40: darken($themeColor, 40%); 
-$checkBoxWidth: 10%;
+$themeColorDarken10: darken($themeColor, 10%);
+$themeColorDarken25: darken($themeColor, 25%);
+$themeColorDarken40: darken($themeColor, 40%);
+$themeColorLighten10: lighten($themeColor, 10%);
+$themeColorLighten25: lighten($themeColor, 25%);
+$themeColorLighten40: lighten($themeColor, 40%);
+$checkBoxWidth: 50px;
 $lineHeight: 50px;
 $hiddenPieceHeight: 6px;
 $pdToMainBd: 16px; 
 
+@mixin placeholder($color, $font){
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $color;
+    font-style: $font;
+  }
+  &::-moz-placeholder { /* Firefox 19+ */
+    color: $color;
+    font-style: $font;
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    color: $color;
+    font-style: $font;
+  }
+  &:-ms-input-placeholder { /* IE 10+ */
+    color: $color;
+    font-style: $font;
+  }
+}
+@mixin transform($values){
+  -webkit-transform: $values;
+  -ms-transform: $values;
+  -o-transform: $values;
+  transform: $values;
+}
+@mixin box-sizing($box: border-box){
+  -webkit-box-sizing: $box;
+  -moz-box-sizing: $box;
+  box-sizing: $box;
+}
 @mixin hiddenPiecePseudo($index){
   position: absolute;
   left: percentage($index/100);
@@ -50,26 +86,58 @@ header h2 {
     @include hiddenPiecePseudo(2);
   } */
   input[type="checkbox"] {
-    // display: none; // test
-    & + label + input {
-      float: left;
+    display: none; // test
+    &#checkAllTodo + label + input, /* 用于添加 todo 的 input 输入框 */
+    & + label + div {/* 所有的 div 输入框 */
+      float: right;//left;
       display: block;
       border: none;
       padding: 0 40px 0 20px;
-      width: 100% - $checkBoxWidth;
+      width: 100%;
       line-height: $lineHeight;
       font-size: 20px;
+      //outline: none;
     }
   }
-  label {
+  label {/* 所有的 label */
+    position: absolute;
+    top: 50%;
+    left: 0;
     float: left;
     display: block;
+    margin-top: -25px;
     width: $checkBoxWidth;
     height: $lineHeight;
   }
   .head {
+    position: relative;
     overflow: hidden;
     border-bottom: 1px solid #ccc;
+    padding-left: 50px;
+    input:checked {/* 全选框 - 被选中 */
+      & + label {
+        &:before {
+          color: $themeColorDarken10;
+        }
+      }
+    }
+    label {/* 全选框 */
+      &:before {
+        position: absolute;
+        top: 13px;
+        left: 20px;
+        display: block;
+        content: '<';
+        width: 10px;
+        height: 25px;
+        line-height: 25px;
+        color: #eee;
+        @include transform(scaleX(2) rotate(-90deg));
+      }
+    }
+    #todoInput {
+      @include placeholder(#ddd, italic);
+    }
   }
   #todo-list {
     &:before {
@@ -82,17 +150,35 @@ header h2 {
       overflow: hidden;
       position: relative;
       border-bottom: 1px solid #eee;
-      input:checked {
+      padding-left: 50px;
+      input:checked {/* 复选框 - 被选中 */
         & + label {
-
+          &:before {
+            border-color: $themeColorLighten10;
+          }
+          &:after {
+            position: absolute;
+            top: 20px;
+            left: 15px;
+            display: inline-block;
+            content: '\a0';
+            width: 20px;
+            height: 8px;
+            border-left: 2px solid $themeColorDarken10;
+            border-bottom: 2px solid $themeColorDarken10;
+            @include transform(rotate(-50deg));// skew(-10deg)
+          }
         }
         & ~ .todo {
           color: #ddd;
           text-decoration: line-through;
         }
       }
-      label {
+      label {/* 复选框 */
         &:before {
+          position: absolute;
+          top: 10px;
+          left: 10px;
           display: block;
           content: '\a0';
           width: 30px;
@@ -115,7 +201,8 @@ header h2 {
         bottom: $pdToMainBd;
         color: $themeColorDarken25;
         font-family: "Microsoft YaHei";
-        transform: scaleX(1.4);
+        // transform: scaleX(1.4);
+        @include transform(scaleX(1.4));
         &:hover {
           color: $themeColorDarken40;
         }
@@ -146,7 +233,7 @@ header h2 {
           cursor: pointer;
         }
         &.chosen {
-          border-color: $themeColorDarken25;
+          border-color: $themeColorDarken10;
         }
       }
     }
